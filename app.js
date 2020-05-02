@@ -6,13 +6,14 @@ const mongoose = require("mongoose");
 const _ = require("lodash");
 
 const app = express();
+const PORT = process.env.PORT || 3000
 
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/todoListDB", {useNewUrlParser:true, useUnifiedTopology:true});
+mongoose.connect("mongodb+srv://admin-jose:degeneration@cluster0-g3pci.mongodb.net/todoListDB", {useNewUrlParser:true, useUnifiedTopology:true});
 const itemsSchema = { name: String };
 const Item = mongoose.model("Item", itemsSchema);
 const eat = new Item({name: "Eat"});
@@ -105,10 +106,8 @@ app.post("/delete", function(req,res){
       }
     })
   }
-
-
 });
 
-app.listen(3000, function() {
+app.listen(PORT, function() {
   console.log("Server started on port 3000");
 });
